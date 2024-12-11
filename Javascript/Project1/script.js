@@ -1,4 +1,4 @@
-const apikey= 'Elhassan7-ApiKey';
+const apikey= 'Elhassan7-ApiKey'; //you need to sign up in https://newsapi.org and get your own api-key
 
 const blogContainer= document.getElementById('blog-container');
 const searchField= document.getElementById('search-input');

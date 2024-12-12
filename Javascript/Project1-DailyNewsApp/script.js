@@ -1,4 +1,4 @@
-const apikey= '1f23009c24df40a28409fddfd16721b2';//'your ApiKey here -chakoukiElhassan-';
+const apikey= 'your ApiKey here -chakoukiElhassan-';
 
 const blogContainer= document.getElementById('blog-container');
 const searchField= document.getElementById('search-input');

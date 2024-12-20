@@ -1,7 +1,28 @@
 {
-    "student":[
-        {"id":1, "name":"hassan", "level":"bac+5", "note":20},
-        {"id":2, "name":"rachid", "level":"bac+5", "note":19},
-        {"id":3, "name":"Fatima", "level":"bac+3", "note":20}
-    ]
+  "student": [
+    {
+      "id": 1,
+      "name": "hassan",
+      "date": "12/03/2000",
+      "note": 20
+    },
+    {
+      "id": 2,
+      "name": "rachid",
+      "date": "19/02/2007",
+      "note": 19
+    },
+    {
+      "id": 3,
+      "name": "Fatima",
+      "date": "23/09/1996",
+      "note": 20
+    },
+    {
+      "id": "f5f3",
+      "name": "نعيمة",
+      "date": "2024-11-29",
+      "note": "2"
+    }
+  ]
 }

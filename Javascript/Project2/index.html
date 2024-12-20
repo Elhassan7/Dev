@@ -11,14 +11,54 @@
 <body>
     <div class="container">
         <div class="app">
+            <h1>Add Student:</h1>
+
+            <form method="post">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        name="name"
+                        id="name"
+                        placeholder="enter your name..."
+                    />
+                </div>
+                <div class="mb-3">
+                    <label for="date" class="form-label">date</label>
+                    <input
+                        type="date"
+                        class="form-control"
+                        name="date"
+                        id="date"
+                        placeholder="DD/MM/YYYY"
+                    />
+                </div>
+                <div class="mb-3">
+                    <label for="note" class="form-label">Note</label>
+                    <input
+                        type="Number"
+                        class="form-control"
+                        name="note"
+                        id="note"
+                        placeholder="enter your note..."
+                        max="20" min="0" step="0.1" 
+                    />
+                </div>
+                <div class="mb-3">
+                    <button class="form-control btn btn-success" id="add">Add Student</button>
+                </div>
+            </form>
+
             <h1>List of students</h1>
+            <span><button class="btn btn-primary my-2 mx-3" id="refresh">Refresh</button></span>
             <div class="table-responsive">
-                <table class="table table-info">
-                    <thead>
-                        <tr>
+                <table class="table">
+                    <thead >
+                        <tr class="table-primary">
                             <th scope="col">id</th>
                             <th scope="col">Name</th>
-                            <th scope="col">Age</th>
+                            <th scope="col">Date</th>
                             <th scope="col">Note</th>
                             <th scope="col">Remove</th>
                         </tr>

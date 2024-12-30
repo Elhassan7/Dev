@@ -1,3 +1,5 @@
+import Rating from "./Rating";
+
 export default function Product({product}){
 
     return <tr>
@@ -7,7 +9,7 @@ export default function Product({product}){
         <th>{product.description}</th>
         <th>{product.category}</th>
         <th><img width='200' src={product.image} alt={product.title} /></th>
-        <th>{product.rating.rate}</th>
-        <th>{product.rating.count}</th>
+        <th><Rating rate={product.rating.rate} count={product.rating.count}/></th>
+        
     </tr>
 }

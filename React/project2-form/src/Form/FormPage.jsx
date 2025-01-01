@@ -11,6 +11,7 @@ export default function FormPage(){
     const [clickSend,setClickSend]= useState(false)
 
     const resetForm = () => {
+        setClickSend(false);
         name.current.value = '';
         email.current.value = '';
         message.current.value = '';
@@ -18,6 +19,7 @@ export default function FormPage(){
     }
 
     const checkForErrors = () =>{
+        setClickSend(false)
         setErrors({});
         setIsErrorListEmpty(true);
         const nameValue =name.current.value;
@@ -28,13 +30,13 @@ export default function FormPage(){
         if(nameValue.trim()=== ''){
             setErrors(prevState => {
                 setIsErrorListEmpty(false)
-                return {...prevState, 'name': 'Fields Required'}});
+                return {...prevState, 'name': 'Field required'}});
         }
 
         if(emailValue.trim()=== ''){
             setErrors(prevState => {
                 setIsErrorListEmpty(false)
-                return {...prevState, 'email': 'Fields Required'}});
+                return {...prevState, 'email': 'Field required'}});
             
         } else if (!emailValue.match(/^\S+@\S+\.\S{2,}$/)){
             setErrors(prevState => {
@@ -45,7 +47,7 @@ export default function FormPage(){
         if(messageValue.trim()=== ''){
             setErrors(prevState => {
                 setIsErrorListEmpty(false)
-                return {...prevState, 'message': 'Fields Required'}});
+                return {...prevState, 'message': 'Field required'}});
             
         }
 
@@ -57,21 +59,38 @@ export default function FormPage(){
 
     }
 
-    const displayErrors = () =>{
+    const displayErrorsAlert = () =>{
         return <div class="alert alert-danger" role="alert">
             <strong>Errors</strong>
-            {console.log(errors)}
             <ul>
-                {Object.entries(errors).map(error =>{
-                    return <li>{error[0]}: {error[1]}</li>
+                {Object.entries(errors).map((error,key) =>{
+                    return <li key={key}>{error[0]}: {error[1]}</li>
                 })}
             </ul>
         </div>
     }
 
+    const displayError= (fieldName)=>{
+        const field = document.querySelector(`#${fieldName}`)
+        if(Object.keys(errors).includes(fieldName)){
+            field.style.border = '1px solid red'
+            return <small class="text-danger">{errors[fieldName]}</small>
+        } else if (field !== null){
+            if(field.attributes.style){
+                field.removeAttribute('style')
+            }
+        }        
+    }
+
+    
+    // useEffect(() => {
+    //     checkForErrors()
+
+    // },[errors,clickSend])
+
     // useEffect(() =>{
     //     if(!isErrorListEmpty){
-    //         displayErrors() 
+    //         displayErrorsAlert() 
     //         setErrors({})
     //     }
         
@@ -80,33 +99,41 @@ export default function FormPage(){
     const submitHandle = (e) => {
         e.preventDefault();
         setClickSend(true);
-
         checkForErrors()
+        if(isErrorListEmpty){
+            resetForm()
+        }
     }
 
 
     return <div className="container-fluid w-75 mx-auto my-5">
-        {isErrorListEmpty && clickSend?
+        {isErrorListEmpty && clickSend? 
+        <>
         <div className="alert alert-success" role="alert">
         Form sent <strong>Successfuly</strong>!
-        </div> : ''
+        </div>
+        </>
+         : ''
         }
         
-        {!isErrorListEmpty?displayErrors():''}
+        {!isErrorListEmpty?displayErrorsAlert():''}
 
         <form onSubmit={submitHandle}>
             <h3>Contact Form</h3>
             <hr />
+
             {/*---Name Area----*/}
             <div class="form-group mb-4">
                 <label for="exampleInputEmail1" htmlFor="name">Name</label>
                 <input type="text" class="form-control" id="name" ref={name} placeholder="Enter name"/>
+                <div>{displayError('name')}</div>
             </div>
 
             {/*---Email Area----*/}
             <div class="form-group mb-4">
                 <label for="exampleInputEmail1">Email address</label>
                 <input type="text" class="form-control" id="email" ref={email} htmlFor="email" placeholder="Enter email"/>
+                <div>{displayError('email')}</div>
                 <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
             </div>
 
@@ -114,16 +141,20 @@ export default function FormPage(){
             <div class="form-group">
                 <label for="exampleInputEmail1">Message</label>
                 <textarea class="form-control" name="message" ref={message} id="message" htmlFor="message" rows='4'></textarea>
+                <div>{displayError('message')}</div>
             </div>
 
             {/*---Checkbox Area----*/}
             <div class="form-group form-check mb-4">
-                <input type="checkbox" class="form-check-input" ref={acceptConditions} id="exampleCheck1" htmlFor="acceptConditions"/>
+                <input type="checkbox" class="form-check-input" ref={acceptConditions} id="accepctConditions" htmlFor="acceptConditions"/>
                 <label class="form-check-label" for="exampleCheck1">Accept Terms & Conditions</label>
+                <div>
+                {displayError('accepctConditions')}
+                </div>
             </div>
 
             {/*---Submit Button----*/}
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary w-100" >Submit</button>
         </form>
     </div>
 }

@@ -1,9 +1,12 @@
 import React from 'react'
+import Sidebar from './componenets/Sidebar/Sidebar'
 
 const App = () => {
-  return (
-    <div>App</div>
-  )
+    return (
+        <>
+            <Sidebar />
+        </>
+    )
 }
 
 export default App
